@@ -4,22 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Painel</h1>
-
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-    <div class="container">
-        <a class="navbar-brand" asp-action="Create">Adicionar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" asp-action="Create">Adicionar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<div class="row">
+    <div class="col-md-12">
+            <div class="row">
+                <div class="col">
+                    <h1>Painel</h1>
+                </div>
+                <div class="col-10">
+                    <a class="btn text-white" style="background-color: #9370DB;" asp-action="Create">Adicionar</a>
+                    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+        
     </div>
-</nav>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -36,7 +38,7 @@
                 @Html.DisplayNameFor(model => model.Categoria)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nome_Arquivo)
+                Nome Arquivo
             </th>
             <th></th>
         </tr>
