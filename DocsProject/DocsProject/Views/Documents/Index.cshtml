@@ -30,7 +30,7 @@
                 @Html.DisplayNameFor(model => model.Categoria)
             </th>
             <th>
-                Nome Arquivo
+                Arquivo
             </th>
             <th></th>
         </tr>
@@ -52,6 +52,11 @@
                     @Html.DisplayFor(modelItem => item.Categoria)
                 </td>
                 <td>
+                    <a class="btn text-white" style="background-color: #9370DB;" asp-action="Create">@Html.DisplayFor(modelItem => item.Nome_Arquivo)</a>
+                    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     @Html.DisplayFor(modelItem => item.Nome_Arquivo)
                 </td>
                 <td>
