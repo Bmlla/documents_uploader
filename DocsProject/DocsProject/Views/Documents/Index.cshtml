@@ -40,19 +40,19 @@
         @foreach (var item in Model)
         {
             <tr>
-                <th>
+                <th style="vertical-align:middle;">
                     @Html.DisplayFor(modelItem => item.Codigo)
                 </th>
-                <td>
+                <td style="vertical-align:middle;">
                     @Html.DisplayFor(modelItem => item.Titulo)
                 </td>
-                <td>
+                <td style="vertical-align:middle;">
                     @Html.DisplayFor(modelItem => item.Processo)
                 </td>
-                <td>
+                <td style="vertical-align:middle;">
                     @Html.DisplayFor(modelItem => item.Categoria)
                 </td>
-                <td>
+                <td style="vertical-align:middle;">
                     <a class="btn text-white h-auto" style="background-color: #9370DB;" asp-action="Create">@Html.DisplayFor(modelItem => item.Nome_Arquivo)</a>
                     <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@
                     </button>
                    
                 </td>
-                <td>
+                <td style="vertical-align:middle;">
                     <a asp-action="Edit" asp-route-id="@item.Codigo">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Codigo">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Codigo">Delete</a>
