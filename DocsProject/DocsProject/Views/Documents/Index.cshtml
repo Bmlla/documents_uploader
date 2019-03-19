@@ -14,7 +14,8 @@
     </div>
 </div>
 
-<table class="table">
+
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
@@ -52,7 +53,7 @@
                     @Html.DisplayFor(modelItem => item.Categoria)
                 </td>
                 <td>
-                    <a class="btn text-white" style="background-color: #9370DB; height: 25px;" asp-action="Create">@Html.DisplayFor(modelItem => item.Nome_Arquivo)</a>
+                    <a class="btn text-white h-auto" style="background-color: #9370DB;" asp-action="Create">@Html.DisplayFor(modelItem => item.Nome_Arquivo)</a>
                     <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
