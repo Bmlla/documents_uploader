@@ -4,19 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#myModal').modal('show');
-    })
-</script>
 
 <div class="container">
-
     <!-- Modal -->
-    <div class="modal fade" role="dialog" id="myModal">
+    <div class="modal fade in" role="dialog" id="myModal">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -74,7 +66,6 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -82,5 +73,10 @@
 
 
 @section Scripts {
+    <script  type="text/javascript">
+        $(document).ready(function () {
+            $('#myModal').modal('show');
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
