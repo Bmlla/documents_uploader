@@ -12,6 +12,7 @@ using System.Web;
 using Microsoft.AspNetCore.Hosting;
 using System.Net.Http.Headers;
 
+
 namespace DocsProject.Controllers
 {
     public class DocumentsController : Controller
@@ -100,6 +101,7 @@ namespace DocsProject.Controllers
             {
                 return NotFound();
             }
+
             return View(documents);
         }
 
@@ -172,23 +174,33 @@ namespace DocsProject.Controllers
             return _context.documentos_salvos.Any(e => e.Codigo == id);
         }
 
-        //User document selection
-        public IActionResult UploadDocument(IList<IFormFile> arquivos)
-        {
-            IFormFile imagemEnviada = arquivos.FirstOrDefault();
-            if (imagemEnviada != null || imagemEnviada.ContentType.ToLower().StartsWith("image/"))
-            {
-                MemoryStream ms = new MemoryStream();
-                imagemEnviada.OpenReadStream().CopyTo(ms);
-                Documents imagemEntity = new Documents()
-                {
-                    Arquivo = ms.ToArray()
-                };
-                _context.documentos_salvos.Add(imagemEntity);
-                _context.SaveChanges();
-            }
-            return RedirectToAction("Index");
 
+        public async Task<IActionResult> DownloadFile(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var documents = await _context.documentos_salvos.FindAsync(id);
+            if (documents == null)
+            {
+                return NotFound();
+            }
+
+            byte[] bytes = documents.Arquivo;
+            FileStream fs = new FileStream(@"D:\baga.pdf", FileMode.OpenOrCreate);
+            fs.Write(bytes, 0, bytes.Length);
+            fs.Close();
+
+            //return View(documents);
+
+            /*byte[] bytes = documents.Arquivo;
+            FileStream fs = new FileStream(@"D:\baga.pdf", FileMode.OpenOrCreate);
+            fs.Write(bytes, 0, bytes.Length);
+            fs.Close();*/
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
