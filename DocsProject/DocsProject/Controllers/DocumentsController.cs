@@ -193,13 +193,6 @@ namespace DocsProject.Controllers
             fs.Write(bytes, 0, bytes.Length);
             fs.Close();
 
-            //return View(documents);
-
-            /*byte[] bytes = documents.Arquivo;
-            FileStream fs = new FileStream(@"D:\baga.pdf", FileMode.OpenOrCreate);
-            fs.Write(bytes, 0, bytes.Length);
-            fs.Close();*/
-
             return RedirectToAction(nameof(Index));
         }
     }
