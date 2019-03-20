@@ -61,7 +61,7 @@ namespace DocsProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(List<IFormFile> file, Documents documents)
+        public async Task<IActionResult> Create(List<IFormFile> file, [FromForm] string titulo, [FromForm] string processo, [FromForm] string categoria, Documents documents)
         {
             if (ModelState.IsValid)
             {
@@ -80,6 +80,11 @@ namespace DocsProject.Controllers
                         }
                     }
                 }
+
+                documents.Titulo = titulo;
+                documents.Processo = processo;
+                documents.Categoria = categoria;
+
                 _context.Add(documents);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
