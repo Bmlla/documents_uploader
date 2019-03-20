@@ -21,64 +21,55 @@
 </nav>
 
 <div class="container">
-    <!-- Modal -->
     <div class="modal fade in" role="dialog" id="createModal">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Adicionar Documento</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-    <div class="col-md-12">
-        <form method="post" enctype="multipart/form-data" asp-controller="Documents" asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Título</label>
-                <input name="titulo" class="form-control" />
-                <span class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Processo</label>
-                <input name="processo" class="form-control" />
-                <span class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Categoria</label>
-                <input name="categoria" class="form-control" />
-                <span  class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Arquivo</label>
-                <div class="row">
-                    <div class="col">
-                        <input type="file" name="file" class="form-control" />
-                        <!--<input asp-for="Arquivo" class="form-control" />-->
-                        <!--<span asp-validation-for="Arquivo" class="text-danger"></span>-->
-                    </div>
-                    <div class="form-group">
-                        <div class="col">
-                            <!--<a class="btn btn-primary" asp-action="Index">Selecionar</a>-->
+                        <div class="col-md-12">
+                            <form method="post" enctype="multipart/form-data" asp-controller="Documents" asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label class="control-label">Título</label>
+                                    <input name="titulo" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Processo</label>
+                                    <input name="processo" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Categoria</label>
+                                    <input name="categoria" class="form-control" />
+                                    <span  class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Arquivo</label>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input type="file" name="file" />
+                                            <!--<input asp-for="Arquivo" class="form-control" />-->
+                                            <!--<span asp-validation-for="Arquivo" class="text-danger"></span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col">
-                        <input type="submit" value="Salvar" class="btn btn-primary" />
-                        <a class="btn btn-primary" asp-action="Index">Voltar</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <input class="btn text-white bg-info" type="submit" value="Salvar" class="btn btn-primary" />
+                                <a class="btn text-white bg-info" data-dismiss="modal">Voltar</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

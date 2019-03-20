@@ -65,6 +65,10 @@ namespace DocsProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                documents.Titulo = titulo;
+                documents.Processo = processo;
+                documents.Categoria = categoria;
+
                 foreach (var data in file)
                 {
                     if (data.Length > 0)
@@ -80,10 +84,6 @@ namespace DocsProject.Controllers
                         }
                     }
                 }
-
-                documents.Titulo = titulo;
-                documents.Processo = processo;
-                documents.Categoria = categoria;
 
                 _context.Add(documents);
                 await _context.SaveChangesAsync();
