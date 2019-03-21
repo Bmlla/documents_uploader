@@ -29,7 +29,10 @@ namespace DocsProject.Controllers
         // GET: Documents
         public async Task<IActionResult> Index()
         {
-            return View(await _context.documentos_salvos.ToListAsync());
+            var docs = from documentos_salvos in _context.documentos_salvos select documentos_salvos;
+
+            docs = docs.OrderBy(documentos_salvos => documentos_salvos.Titulo);
+            return View(docs.ToList());
         }
 
         // GET: Documents/Details/5
@@ -65,25 +68,7 @@ namespace DocsProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                documents.Titulo = titulo;
-                documents.Processo = processo;
-                documents.Categoria = categoria;
-
-                foreach (var data in file)
-                {
-                    if (data.Length > 0)
-                    {
-                        documents.Nome_Arquivo = data.FileName;
-                        using (var memorySt = new MemoryStream())
-                        {
-                            data.CopyTo(memorySt);
-                            var fileBytes = memorySt.ToArray();
-                            string s = Convert.ToBase64String(fileBytes);
-
-                            documents.Arquivo = fileBytes;
-                        }
-                    }
-                }
+                this.convertFileByte(file, titulo, processo, categoria, documents);
 
                 _context.Add(documents);
                 await _context.SaveChangesAsync();
@@ -115,7 +100,7 @@ namespace DocsProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Codigo,Titulo,Processo,Categoria,Arquivo")] Documents documents)
+        public async Task<IActionResult> Edit(int id, List<IFormFile> file, [FromForm] string titulo, [FromForm] string processo, [FromForm] string categoria, Documents documents)
         {
             if (id != documents.Codigo)
             {
@@ -124,6 +109,8 @@ namespace DocsProject.Controllers
 
             if (ModelState.IsValid)
             {
+                this.convertFileByte(file, titulo, processo, categoria, documents);
+
                 try
                 {
                     _context.Update(documents);
@@ -193,12 +180,44 @@ namespace DocsProject.Controllers
                 return NotFound();
             }
 
+            string folder = @"C:\DownloadDocs";
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            //Baixa o arquivo
             byte[] bytes = documents.Arquivo;
-            FileStream fs = new FileStream(@"D:\baga.pdf", FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(@"C:\DownloadDocs\" + documents.Nome_Arquivo, FileMode.OpenOrCreate);
             fs.Write(bytes, 0, bytes.Length);
             fs.Close();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private Documents convertFileByte(List<IFormFile> file, [FromForm] string titulo, [FromForm] string processo, [FromForm] string categoria, Documents documents)
+        {
+            documents.Titulo = titulo;
+            documents.Processo = processo;
+            documents.Categoria = categoria;
+
+            foreach (var data in file)
+            {
+                if (data.Length > 0)
+                {
+                    documents.Nome_Arquivo = data.FileName;
+                    using (var memorySt = new MemoryStream())
+                    {
+                        data.CopyTo(memorySt);
+                        var fileBytes = memorySt.ToArray();
+                        string s = Convert.ToBase64String(fileBytes);
+
+                        documents.Arquivo = fileBytes;
+                    }
+                }
+            }
+
+            return documents;
         }
     }
 }

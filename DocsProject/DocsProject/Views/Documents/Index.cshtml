@@ -30,28 +30,28 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form method="post" enctype="multipart/form-data" asp-controller="Documents" asp-action="Create">
+                            <form method="post" enctype="multipart/form-data" asp-controller="Documents" asp-action="Create" onsubmit="return checkFile();">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
                                     <label class="control-label">Título</label>
-                                    <input name="titulo" class="form-control" required/>
+                                    <input name="titulo" class="form-control" required />
                                     <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Processo</label>
-                                    <input name="processo" class="form-control" required/>
+                                    <input name="processo" class="form-control" required />
                                     <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Categoria</label>
-                                    <input name="categoria" class="form-control" required/>
+                                    <input name="categoria" class="form-control" required />
                                     <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Arquivo</label>
                                     <div class="row">
                                         <div class="col">
-                                            <input type="file" name="file" required/>
+                                            <input type="file" id="uploadFile" name="file" required />
                                             <!--<input asp-for="Arquivo" class="form-control" />-->
                                             <!--<span asp-validation-for="Arquivo" class="text-danger"></span>-->
                                         </div>
@@ -60,7 +60,7 @@
                                 <div class="navbar-form">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <hr/>
+                                            <hr />
                                             <input class="btn text-white bg-info" type="submit" value="Salvar" />
                                             <a class="btn text-white bg-info" data-dismiss="modal">Voltar</a>
                                         </div>
@@ -134,27 +134,28 @@
                     <a class="btn text-white bg-info" style="font-size: 13px;" asp-action="Edit" asp-route-id="@item.Codigo">Editar</a>
                     <!--<a asp-action="Details" asp-route-id="@item.Codigo">Details</a>-->
 
-                    <a class="btn text-white btn-danger" style="font-size: 13px;" data-toggle="modal" data-target="#deleteModal">Deletar</a>
-                    <div class="container">
-                        <div class="modal fade in" role="dialog" id="deleteModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Deletar Documento?</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="post" enctype="multipart/form-data" asp-controller="Documents" asp-action="Delete" asp-route-id="@item.Codigo">
-                                            <input type="hidden" name="codigo" />
-                                            <input type="submit" value="Sim" name="codigo" class="btn btn-danger" />
-                                            <a asp-action="Index" class="btn text-white h-auto bg-info" data-dismiss="modal">Não</a>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <a class="btn text-white btn-danger" style="font-size: 13px;" asp-action="Delete" asp-route-id="@item.Codigo">Deletar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@section Scripts{
+    <script type="text/javascript">
+    function checkFile() {
+        var fileElement = document.getElementById("uploadFile");
+        var fileExtension = "";
+        if (fileElement.value.lastIndexOf(".") > 0) {
+            fileExtension = fileElement.value.substring(fileElement.value.lastIndexOf(".") + 1, fileElement.value.length);
+        }
+        if (fileExtension.toLowerCase() != "pdf" && fileExtension.toLowerCase() != "doc" && fileExtension.toLowerCase() != "xls") {
+            alert("Apenas são permitidos arquivos com as extensões PDF, DOC e XLS");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    </script>
+}

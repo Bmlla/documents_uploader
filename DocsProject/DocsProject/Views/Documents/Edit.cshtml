@@ -4,45 +4,51 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Documents</h4>
+<h1>Editar</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-12">
+        <form class="needs-validation" novalidate method="post" enctype="multipart/form-data" asp-controller="Documents" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Codigo" />
             <div class="form-group">
                 <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
+                <input asp-for="Titulo" class="form-control" required/>
+                <span asp-validation-for="Titulo" class="text-danger">Campo Obrigatório</span>
             </div>
             <div class="form-group">
                 <label asp-for="Processo" class="control-label"></label>
-                <input asp-for="Processo" class="form-control" />
-                <span asp-validation-for="Processo" class="text-danger"></span>
+                <input asp-for="Processo" class="form-control" required/>
+                <span asp-validation-for="Titulo" class="text-danger">Campo Obrigatório</span>
             </div>
             <div class="form-group">
                 <label asp-for="Categoria" class="control-label"></label>
-                <input asp-for="Categoria" class="form-control" />
-                <span asp-validation-for="Categoria" class="text-danger"></span>
+                <input asp-for="Categoria" class="form-control" required/>
+                <span asp-validation-for="Titulo" class="text-danger">Campo Obrigatório</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Arquivo anterior</label>
+                <input asp-for="Nome_Arquivo" class="form-control" disabled=""/>
             </div>
             <div class="form-group">
                 <label asp-for="Arquivo" class="control-label"></label>
-                <input asp-for="Arquivo" class="form-control" />
-                <span asp-validation-for="Arquivo" class="text-danger"></span>
+                <div class="row">
+                    <div class="col">
+                        <input type="file" name="file" asp-for="Arquivo" class="form-control" required />
+                        <span asp-validation-for="Titulo" class="text-danger">Campo Obrigatório</span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <div class="row">
+                    <div class="col">
+                        <input type="hidden" asp-for="Codigo" />
+                        <input class="btn btn-primary" type="submit" value="Salvar" />
+                        <a class="btn btn-primary" asp-action="Index">Voltar</a>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
